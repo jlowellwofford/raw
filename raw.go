@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"golang.org/x/net/bpf"
+	"golang.org/x/sys/unix"
 )
 
 // ErrNotImplemented is returned when certain functionality is not yet
@@ -48,7 +49,7 @@ func (c *Conn) ReadFrom(b []byte) (int, net.Addr, error) {
 }
 
 // Recvfrom implments a raw Recvfrom method without interpreting the sockaddr
-func (c *Conn) Recvfrom(b []byte) (int, net.UnixAddr, error) {
+func (c *Conn) Recvfrom(b []byte) (int, unix.Sockaddr, error) {
 	return c.p.Recvfrom(b)
 }
 
