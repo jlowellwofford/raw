@@ -159,6 +159,11 @@ func (p *packetConn) ReadFrom(b []byte) (int, net.Addr, error) {
 	}, nil
 }
 
+// Recvfrom implments a raw Recvfrom without interpretting sockaddr
+func (p *packetConn) Recvfrom(b []byte) (int, unix.Sockaddr, error) {
+	return p.s.Recvfrom(b, 0)
+}
+
 // WriteTo implements the net.PacketConn.WriteTo method.
 func (p *packetConn) WriteTo(b []byte, addr net.Addr) (int, error) {
 	// Ensure correct Addr type.

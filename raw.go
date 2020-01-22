@@ -47,6 +47,11 @@ func (c *Conn) ReadFrom(b []byte) (int, net.Addr, error) {
 	return c.p.ReadFrom(b)
 }
 
+// Recvfrom implments a raw Recvfrom method without interpreting the sockaddr
+func (c *Conn) Recvfrom(b []byte) (int, net.UnixAddr, error) {
+	return c.p.Recvfrom(b)
+}
+
 // WriteTo implements the net.PacketConn WriteTo method.
 func (c *Conn) WriteTo(b []byte, addr net.Addr) (int, error) {
 	return c.p.WriteTo(b, addr)
